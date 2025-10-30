@@ -71,7 +71,7 @@ app.post('/api/tasks', (req, res)=>{
 //Mettre a jour une tache
 app.put('/api/tasks/:id', (req, res)=>{
   try{ 
-  const{id}= req.params;
+  const{id}= parseInt(req.params.id);
   const{title, description, completed, priority, dueDate}= req.body;
 
   const task= tasks.find((t)=>t.id===id);
@@ -84,7 +84,7 @@ app.put('/api/tasks/:id', (req, res)=>{
     return res.status(400).json({error: "Le titre ne peut pas etre vide."});
   }
   const validPriorities= ["low", "medium", "high"];
-  if(priotity && !validPriorities.includes(priority)){
+  if(priority && !validPriorities.includes(priority)){
     return res
           .status(400)
           .json({error: "la priorite doit etre 'low', 'medium', ou 'high' ."});
@@ -104,7 +104,8 @@ app.put('/api/tasks/:id', (req, res)=>{
 
   res.json(task);
 }catch(err){
-  next(err);
+   console.error("Erreur PUT /api/tasks/:id :", err);
+  res.status(500).json({error: "Erreur interne du serveur"});
 }
 });
 
