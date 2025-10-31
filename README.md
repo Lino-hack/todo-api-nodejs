@@ -83,3 +83,33 @@ L'API sera disponible sur: **http://localhost:3000**
 
 Projet réalisé par **Alioune Ndiaye**  
 Dans le cadre de l’exercice **API REST - Node.js + Express (CRUD)**.
+
+
+---
+
+## Exercice 2.2 : Authentification JWT
+
+Cette version ajoute un système d’authentification avec JWT.  
+Chaque utilisateur doit s’inscrire et se connecter pour gérer ses propres tâches.
+
+### Nouvelles routes
+
+| Méthode | Endpoint | Description |
+|----------|-----------|--------------|
+| POST | /api/auth/register | Inscription d’un utilisateur |
+| POST | /api/auth/login | Connexion et génération du JWT |
+| GET | /api/auth/me | Récupération du profil utilisateur connecté |
+
+Toutes les routes `/api/tasks` sont maintenant **protégées** par un token JWT.
+
+### Nouveaux packages installés
+- `bcryptjs` → pour le hachage des mots de passe  
+- `jsonwebtoken` → pour la création et la vérification des tokens JWT  
+
+### Étapes de test
+1. Crée un utilisateur via `POST /api/auth/register`
+2. Connecte-toi via `POST /api/auth/login`
+3. Copie le token JWT de la réponse
+4. Ajoute ce token dans Postman :
+
+
